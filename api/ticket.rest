@@ -1,0 +1,23 @@
+@id=1
+###
+GET http://localhost:8080/ticket/{{id}}
+
+###
+POST http://localhost:8080/ticket_options
+Content-Type: application/json
+
+{
+    "name": "example",
+    "desc": "sample description",
+    "allocation": 100
+}
+
+
+###
+POST http://localhost:8080/ticket_options/{{id}}/purchases
+Content-Type: application/json
+
+{
+    "quantity": -96,
+    "user_id": "406c1d05-bbb2-4e94-b183-7d208c2692e1"
+}
