@@ -1,0 +1,75 @@
+openapi: 3.1.0
+info:
+  title: TicketAPI document
+  description: This API allows user to create tickets with allocations, get them and purchase tickets. For now, there are no payment and authentication parts. 
+  version: 1.0.0
+paths:
+  /ticket/{id}:
+    get:
+      summary: gets the ticket info 
+      parameters: id
+      responses: 
+        200:
+          description: OK.
+          content: {
+            "id": 1,
+            "name": "example",
+            "desc": "sample description",
+            "allocation": 100
+          }
+
+        400:
+          description: Bad URL parameters.
+          content: error
+
+        404:
+          description: Ticket not found.
+          content: error
+
+        500:
+          description: The server had a problem with marshaling the response.
+          content: error
+  
+  /ticket_options:
+    post:
+      summary: Creates the requested ticket option and returns the id.
+      parameters: name, description, allocation
+      responses: 
+        200: 
+          description: OK.
+          content: {
+            "id": 1,
+            "name": "example",
+            "desc": "sample description",
+            "allocation": 100
+          }
+
+        400:
+          description: Invalid request parameters.
+          content: error
+          
+        500:
+          description: The server had a problem with marshaling the response.
+          content: error
+
+  /ticket_options/{{id}}/purchases:
+    post:
+      summary: Purchases tickets from the given ticket option.
+      parameters: id, purchase, user_id
+      responses: 
+        200:
+          description: OK
+          content: no-content
+
+        400:
+          description: Invalid request or URL parameters. E.g. requesting too many tickets.
+          content: error
+
+        404:
+          description: Ticket not found.
+          content: error
+
+        500:
+          description: The server had a problem with marshaling the response.
+          content: error
+  
