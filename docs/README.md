@@ -2,9 +2,16 @@
 
 ## SetUp
 
+ * Create .env file that contains variables: 
+    * DB_USER
+    * DB_PASSWORD
+    * DB_NAME
+    * DB_CONTAINER
+    * DB_URL
  * Start db: docker compose up -d
- * Create db tables
- * Host the API: go run main.go
+ * Create db tables: docker exec -it {container_id} migrate -path ./sql-migrations -database {database_url} up
+    * db URL Format: postgres://{DB_USER}:{DB_PASSWORD}@{DB_CONTAINER}:5432/{DB_NAME}?sslmode=disable
+
 
  ## Testing
 
